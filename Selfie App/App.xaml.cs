@@ -15,6 +15,7 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Navigation;
+using Windows.Storage;
 
 // The Blank Application template is documented at http://go.microsoft.com/fwlink/?LinkId=391641
 
@@ -99,6 +100,8 @@ namespace Selfie_App
 
             // Ensure the current window is active
             Window.Current.Activate();
+
+            Utils.LoadVoiceCommandDefinition();
         }
 
         /// <summary>

@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<VoiceCommands xmlns="http://schemas.microsoft.com/voicecommands/1.0">
+
+  <CommandSet xml:lang="en-us" Name="EnglishCommands">
+
+    <CommandPrefix>Let me</CommandPrefix>
+
+    <Example>Let me take a selfie</Example>
+    
+    <Command Name="selfie">
+      <Example>Let me take a selfie</Example>
+      <ListenFor>take a selfie</ListenFor>
+      <Feedback>What a creeper</Feedback>
+      <Navigate Target="MainPage.xaml"/>
+    </Command>
+  </CommandSet>
+</VoiceCommands>

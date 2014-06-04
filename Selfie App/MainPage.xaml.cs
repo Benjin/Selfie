@@ -17,6 +17,8 @@ using System.Threading.Tasks;
 using Windows.Media.MediaProperties;
 using Windows.Storage;
 using Windows.Phone.UI.Input;
+using Windows.Phone;
+using Windows.Media.SpeechRecognition;
 
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=391641
@@ -28,6 +30,9 @@ namespace Selfie_App
     /// </summary>
     public sealed partial class MainPage : Page
     {
+        private bool voiceCommandInitialized = false;
+        private RoutedEventHandler onLoadedEventHandler;
+
         public MainPage()
         {
             HardwareButtons.CameraHalfPressed += CameraHalfPressed;
@@ -36,6 +41,21 @@ namespace Selfie_App
             this.InitializeComponent();
 
             this.NavigationCacheMode = NavigationCacheMode.Required;
+        }
+
+
+        public async void OnLoaded(object sender, EventArgs e)
+        {
+            if (!this.voiceCommandInitialized)
+            {
+                try
+                {
+                    Uri uri = new Uri("ms-appx:///voicecommands.xml", UriKind.Absolute);
+                    StorageFile file = await StorageFile.GetFileFromApplicationUriAsync(uri);
+                    await VoiceCommandManager.InstallCommandSetsFromStorageFileAsync(file);
+                }
+                catch (Exception) { }
+            }
         }
 
         /// <summary>
