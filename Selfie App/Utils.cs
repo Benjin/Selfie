@@ -18,7 +18,10 @@ namespace Selfie_App
                 StorageFile file = await StorageFile.GetFileFromApplicationUriAsync(uri);
                 await VoiceCommandManager.InstallCommandSetsFromStorageFileAsync(file);
             }
-            catch (Exception) { }
+            catch (Exception e)
+            {
+
+            }
         }
     }
 }

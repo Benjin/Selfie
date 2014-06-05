@@ -43,21 +43,6 @@ namespace Selfie_App
             this.NavigationCacheMode = NavigationCacheMode.Required;
         }
 
-
-        public async void OnLoaded(object sender, EventArgs e)
-        {
-            if (!this.voiceCommandInitialized)
-            {
-                try
-                {
-                    Uri uri = new Uri("ms-appx:///voicecommands.xml", UriKind.Absolute);
-                    StorageFile file = await StorageFile.GetFileFromApplicationUriAsync(uri);
-                    await VoiceCommandManager.InstallCommandSetsFromStorageFileAsync(file);
-                }
-                catch (Exception) { }
-            }
-        }
-
         /// <summary>
         /// Invoked when this page is about to be displayed in a Frame.
         /// </summary>
@@ -65,8 +50,7 @@ namespace Selfie_App
         /// This parameter is typically used to configure the page.</param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-
-
+            initCamera();
         }
 
         private int count = 0;
@@ -77,26 +61,23 @@ namespace Selfie_App
             CounterBlock.Text = "Count: " + count;
         }
 
-        private void LaunchCamera_Click(object sender, RoutedEventArgs e)
+        private void TakeSelfie_Click(object sender, RoutedEventArgs e)
         {
-            if (camera == null)
-            {
-                initCamera();
-                LaunchCamera.Content = "Take Selfie";
-            }
-            else
-                capturePhoto();
+            capturePhoto();
         }
 
         MediaCapture camera = null;
 
         private async void initCamera()
         {
-            camera = new MediaCapture();
-            await camera.InitializeAsync();
+            if (camera == null)
+            {
+                camera = new MediaCapture();
+                await camera.InitializeAsync();
 
-            camera.SetPreviewRotation(VideoRotation.Clockwise270Degrees);
-            camera.SetRecordRotation(VideoRotation.Clockwise270Degrees);
+                camera.SetPreviewRotation(VideoRotation.Clockwise270Degrees);
+                camera.SetRecordRotation(VideoRotation.Clockwise270Degrees);
+            }
 
             CameraPreview.Source = camera;
             await camera.StartPreviewAsync();

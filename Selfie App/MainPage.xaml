@@ -10,7 +10,7 @@
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="*" />
+            <RowDefinition Height="0*" />
             <RowDefinition Height="5*" />
         </Grid.RowDefinitions>
         <Grid Grid.Row="0" Grid.Column="0">
@@ -23,11 +23,9 @@
         </Grid>
         <Grid Grid.Row="1" Grid.Column="0">
             <Grid.RowDefinitions>
-                <RowDefinition Height="auto" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
-            <Button Name="LaunchCamera" Content="Launch camera" HorizontalAlignment="Center" Grid.Row="0" VerticalAlignment="Center" Click="LaunchCamera_Click"/>
-            <CaptureElement Name="CameraPreview" Grid.Row="1" />
+            <CaptureElement Name="CameraPreview" Grid.Row="0" Stretch="UniformToFill"/>
         </Grid>
     </Grid>
 </Page>
